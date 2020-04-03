@@ -52,42 +52,36 @@ class OrderList {
         cout << "3. ice tea 3 TL" << endl;
         cout << "4. fruit juice 3.5 TL" << endl;
         cout << "Press -1 for save your order" << endl;
-        cin >> drinkNum;
-        drinkNums = new int[50];
-        if (drinkNum != 0) {
-            while (drinkNum != -1) {
-                drinkNums[numOfDrinks] = drinkNum;
-                numOfDrinks += 1;
-                cin >> drinkNum;
-            }
-            drinks = new string [numOfDrinks];
-            for (int i = 0; i < numOfDrinks; i++) {
-                if (drinkNums[i] == 1) {
-                    drinks[i] = "cola";
-                } else if (drinkNums[i] == 2) {
-                    drinks[i] = "soda";
-                } else if (drinkNums[i] == 3) {
-                    drinks[i] = "ice tea";
-                } else if (drinkNums[i] == 4) {
-                    drinks[i] = "fruit juice";
-                }
-            }
+        drinkNums = new int[4];
+        for (int i = 0; i < 4; i++) {
+            drinkNums[i] = 0;
+        }
+        do {
+            cin >> drinkNum;
+            if (drinkNum == 0) {
+                cout << "Please enter your name:" << endl;
+                cin >> customer;
+                Order * neworder = new Order(customer, headpizza);
+                AddToList(neworder);
+                cout << "Your order is saved, it will be delivered when it is ready..." << endl;
+                neworder->printOrder();
+                return;
+            } else if (drinkNum == 1) {
+                drinkNums[0] += 1;
+            } else if (drinkNum == 2) {
+                drinkNums[1] += 1;
+            } else if (drinkNum == 3) {
+                drinkNums[2] += 1;
+            } else if (drinkNum == 4) {
+                drinkNums[3] += 1;
+            } 
+        } while (drinkNum != -1);
             cout << "Please enter your name:" << endl;
             cin >> customer;
-            Order * neworder = new Order(customer, headpizza, drinks);
-            neworder->addDrinkAmount(numOfDrinks);
+            Order * neworder = new Order(customer, headpizza, drinkNums);
             AddToList(neworder);
             cout << "Your order is saved, it will be delivered when it is ready..." << endl;
             neworder->printOrder();
-        } else {
-            cout << "Please enter your name:" << endl;
-            cin >> customer;
-            Order * neworder = new Order(customer, headpizza);
-            neworder->addDrinkAmount(0);
-            AddToList(neworder);
-            cout << "Your order is saved, it will be delivered when it is ready..." << endl;
-            neworder->printOrder();
-			}
     }
     void listOrders() {
         Order * traverse = head;

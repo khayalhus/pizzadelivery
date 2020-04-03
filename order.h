@@ -5,16 +5,19 @@ using namespace std;
 class Order {
     string customer;
     Pizza * pizzas;
-    string * drink;
-    int amountOfDrink;
+    int * drink;
     Order * next;
     public:
     Order(string customer, Pizza * pizzas) {
         this->customer = customer;
         this->pizzas = pizzas;
         this->next = NULL;
+        this->drink = new int[4];
+        for (int i = 0; i < 4; i++) {
+            drink[i] = 0;
+        }
     }
-    Order(string customer, Pizza * pizzas, string * drink) {
+    Order(string customer, Pizza * pizzas, int * drink) {
         this->customer = customer;
         this->pizzas = pizzas;
         this->drink = drink;
@@ -28,15 +31,12 @@ class Order {
             traverse->print();
             traverse = traverse->getNext();
         }
-        
-        for (int i = 0; i < amountOfDrink; i++) {
-            cout << "1 " << this->drink[i] << ", ";
-        }
+        cout << this->drink[0] << " cola, ";
+        cout << this->drink[1] << " soda, ";
+        cout << this->drink[2] << " ice tea, ";
+        cout << this->drink[3] << " fruit juice";
         cout << endl << "------------" << endl;
     }
-    void addDrinkAmount(int amount) {
-		this->amountOfDrink = amount;
-	}
 	void setNext(Order * nextorder) {
 		this->next = nextorder;
 	}
