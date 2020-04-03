@@ -25,6 +25,7 @@ int main() {
 			list->listOrders();
 			break;
 		case 3:
+			list->deliverOrders();
 			break;
 		case 4:
 			cout << "Goodbye..." << endl;

@@ -60,7 +60,8 @@ class OrderList {
             cin >> drinkNum;
             if (drinkNum == 0) {
                 cout << "Please enter your name:" << endl;
-                cin >> customer;
+                cin.ignore();
+                getline(cin, customer);
                 Order * neworder = new Order(customer, headpizza);
                 AddToList(neworder);
                 cout << "Your order is saved, it will be delivered when it is ready..." << endl;
@@ -77,7 +78,8 @@ class OrderList {
             } 
         } while (drinkNum != -1);
             cout << "Please enter your name:" << endl;
-            cin >> customer;
+            cin.ignore();
+            getline(cin, customer);
             Order * neworder = new Order(customer, headpizza, drinkNums);
             AddToList(neworder);
             cout << "Your order is saved, it will be delivered when it is ready..." << endl;
@@ -87,6 +89,7 @@ class OrderList {
         Order * traverse = head;
         for (int i = 0; i < n; i++){
             traverse->printOrder();
+            cout << i+1 << endl;
             traverse = traverse->getNext();
         }
     }
@@ -101,5 +104,9 @@ class OrderList {
             traverse = traverse->getNext();
         }
         traverse->setNext(neworder);
+    }
+    void deliverOrders () {
+        this->listOrders();
+
     }
 };

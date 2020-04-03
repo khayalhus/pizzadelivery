@@ -31,11 +31,38 @@ class Order {
             traverse->print();
             traverse = traverse->getNext();
         }
-        cout << this->drink[0] << " cola, ";
-        cout << this->drink[1] << " soda, ";
-        cout << this->drink[2] << " ice tea, ";
-        cout << this->drink[3] << " fruit juice";
+        if (this->drink[0] != 0) {
+            cout << this->drink[0] << " cola, ";
+        }
+        if (this->drink[0] != 0) {
+            cout << this->drink[0] << " soda, ";
+        }
+        if (this->drink[0] != 0) {
+            cout << this->drink[0] << " ice tea, ";
+        }
+        if (this->drink[0] != 0) {
+            cout << this->drink[0] << " fruit juice, ";
+        }
         cout << endl << "------------" << endl;
+    }
+    double getPrice() {
+        double totalPrice = 0.0;
+        Pizza * traverse = pizzas;
+        while (traverse != NULL) {
+            if (traverse->getSize().compare("small") == 0) {
+                totalPrice += 15;
+            } else if (traverse->getSize().compare("medium") == 0) {
+                totalPrice += 20;
+            } else if (traverse->getSize().compare("big") == 0) {
+                totalPrice += 25;
+            }
+            traverse = traverse->getNext();
+        }
+        totalPrice += drink[0] * 4;
+        totalPrice += drink[1] * 2;
+        totalPrice += drink[2] * 3;
+        totalPrice += drink[3] * 3.5;
+        return totalPrice;
     }
 	void setNext(Order * nextorder) {
 		this->next = nextorder;

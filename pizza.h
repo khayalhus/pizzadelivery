@@ -92,4 +92,7 @@ public:
 	Pizza * getNext() {
 		return this->next;
 	}
+	string getSize () {
+		return this->size;
+	}
 };
