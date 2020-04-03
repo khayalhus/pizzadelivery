@@ -1,64 +1,107 @@
 #include <iostream>
-#include "pizza.h"
+#include "order.h"
 
 using namespace std;
 
 int main() {
 	int choice = 0;
 	while (choice != 4) {
-		printf("Welcome to Unicorn Pizza!\n");
-		printf("1. Add an order\n");
-		printf("2. List orders\n");
-		printf("3. Deliver order\n");
-		printf("4. Exit\n");
-		printf("Choose what to do: ");
+		cout << "Welcome to Unicorn Pizza!" << endl;
+		cout << "1. Add an order" << endl;
+		cout << "2. List orders" << endl;
+		cout << "3. Deliver order" << endl;
+		cout << "4. Exit" << endl;
+		cout << "Choose what to do: " << endl;
 		cin >> choice;
-		if (choice == 1) {
-			printf("Pizza Menu\n");
-			printf("1. Chicken Pizza : mozarella, chicken, mushroom, corn, onion, tomato\n");
-			printf("2. Broccoli Pizza : mozarella, broccoli, pepperoni, olive, corn, onion\n");
-			printf("3. Sausage Pizza : mozarella, sausage, tomato, olive, mushroom, corn\n");
-			printf("0. Back to main menu\n");
-			//take input			string size;
-			string crust_type;
-			int pizza_type;			int amount;			cin >> pizza_type;			if (pizza_type == 0) {				break;			}			printf("Select size: small (15 TL), medium (20 TL), big (25 TL)\n");			cin >> size;			printf("Select crust type: thin, normal, thick\n");			cin >> crust_type;			printf("Enter the amount:");			cin >> amount;			//call constructor Pizza(); iteratively
-			//printf("Please enter the number of ingredient you want to remove from your pizza.");
-		}
-		else if (choice == 2) {
-
-		}
-		else if (choice == 3) {
-
-		}
-		else if (choice == 4) {
-			printf("Goodbye...");
-		}
-		/*
 		switch (choice)
 		{
 		case 1:
 		{
-			printf("Pizza Menu\n");
-			printf("1. Chicken Pizza : mozarella, chicken, mushroom, corn, onion, tomato\n");
-			printf("2. Broccoli Pizza : mozarella, broccoli, pepperoni, olive, corn, onion\n");
-			printf("3. Sausage Pizza : mozarella, sausage, tomato, olive, mushroom, corn\n");
-			printf("0. Back to main menu\n");
-			//take input			string size;
+			cout << "Pizza Menu" << endl;
+			cout << "1. Chicken Pizza : mozarella, chicken, mushroom, corn, onion, tomato" << endl;
+			cout << "2. Broccoli Pizza : mozarella, broccoli, pepperoni, olive, corn, onion" << endl;
+			cout << "3. Sausage Pizza : mozarella, sausage, tomato, olive, mushroom, corn" << endl;
+			cout << "0. Back to main menu" << endl;
+
+			string size;
 			string crust_type;
-			int pizza_type;			cin >> pizza_type;			if (pizza_type == 0) {				break;			}			printf("Select size: small (15 TL), medium (20 TL), big (25 TL)\n");			cin >> size;			printf("Select crust type: thin, normal, thick");			cin >> crust_type;			printf("Enter the amount:");			//call constructor Pizza(); iteratively
-			break;
-			//printf("Please enter the number of ingredient you want to remove from your pizza.");
+			int pizza_type;
+			int amount;
+			string customer;
+			int drinkNum;
+			int * drinkNums;
+			int numOfDrinks = 0;
+			string * drinks;
+			cin >> pizza_type;
+			if (pizza_type == 0) {
+				break;
+			}
+			cout << "Select size: small (15 TL), medium (20 TL), big (25 TL)" << endl;
+			cin >> size;
+			cout << "Select crust type: thin, normal, thick" << endl;
+			cin >> crust_type;
+			cout << "Enter the amount:";
+			cin >> amount;
+			Pizza * headpizza = new Pizza(size, crust_type, pizza_type);
+			Pizza * tail = headpizza;
+			for (int i = 1; i < amount; i++) {
+				Pizza * newpizza = new Pizza(*headpizza);
+				tail->setNext(newpizza);
+				tail = newpizza;
+			}
+			
+			cout << "Please choose a drink:" << endl;
+			cout << "0. no drink" << endl;
+			cout << "1. cola 4 TL" << endl;
+			cout << "2. soda 2 TL" << endl;
+			cout << "3. ice tea 3 TL" << endl;
+			cout << "4. fruit juice 3.5 TL" << endl;
+			cout << "Press -1 for save your order" << endl;
+			cin >> drinkNum;
+			drinkNums = new int[50];
+			if (drinkNum != 0) {
+				while (drinkNum != -1) {
+					drinkNums[numOfDrinks] = drinkNum;
+					numOfDrinks += 1;
+					cin >> drinkNum;
+				}
+				drinks = new string [numOfDrinks];
+				for (int i = 0; i < numOfDrinks; i++) {
+					if (drinkNums[i] == 1) {
+						drinks[i] = "cola";
+					} else if (drinkNums[i] == 2) {
+						drinks[i] = "soda";
+					} else if (drinkNums[i] == 3) {
+						drinks[i] = "ice tea";
+					} else if (drinkNums[i] == 4) {
+						drinks[i] = "fruit juice";
+					}
+				}
+				cout << "Please enter your name:" << endl;
+				cin >> customer;
+				Order * neworder = new Order(customer, headpizza, drinks);
+				neworder->addDrinkAmount(numOfDrinks);
+				cout << "Amount: " << numOfDrinks << endl;
+				cout << "Your order is saved, it will be delivered when it is ready..." << endl;
+				neworder->printOrder();
+			} else {
+				cout << "Please enter your name:" << endl;
+				cin >> customer;
+				Order * neworder = new Order(customer, headpizza);
+				neworder->addDrinkAmount(0);
+				cout << "Your order is saved, it will be delivered when it is ready..." << endl;
+				neworder->printOrder();
+			}
 		}
 		case 2:
 			break;
 		case 3:
 			break;
 		case 4:
-			printf("Goodbye...");
+			cout << "Goodbye..." << endl;
 			break;
 		default:
 			break;
 		}
-		*/
 	}
 }
