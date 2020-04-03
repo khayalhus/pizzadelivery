@@ -7,9 +7,12 @@ class OrderList {
     int n;
     Order * head;
     public:
-    OrderList(){
+    OrderList() {
         n = 0;
         head = NULL;
+    }
+    ~OrderList() {
+        delete [] head;
     }
     void takeOrder() {
         cout << "Pizza Menu" << endl;
@@ -86,10 +89,14 @@ class OrderList {
             neworder->printOrder();
     }
     void listOrders() {
+        if (n == 0) {
+            cout << "empty" << endl;
+            return;
+        }
         Order * traverse = head;
         for (int i = 0; i < n; i++){
-            traverse->printOrder();
             cout << i+1 << endl;
+            traverse->printOrder();
             traverse = traverse->getNext();
         }
     }
@@ -106,7 +113,61 @@ class OrderList {
         traverse->setNext(neworder);
     }
     void deliverOrders () {
+        if (head == NULL) {
+            cout << "No Order" << endl;
+            return;
+        }
         this->listOrders();
-
+        cout << "Please write the customer name in order to deliver his/her order: ";
+        string name;
+        Order * traverse = head;
+        cin.ignore();
+        getline(cin, name);
+        while(traverse->getName().compare(name) != 0) {
+            traverse = traverse->getNext();
+            if (traverse == NULL) {
+                cout << "Wrong name" << endl;
+                return;
+            }
+        }
+        cout << "Following order is delivering..." << endl;
+        traverse->printOrder();
+        cout << "Total price: " << traverse->getPrice() << endl;
+        char promoConfirm;
+        do {
+            cout << "Do you have a promotion code? (y/n)" << endl;
+            cin >> promoConfirm;
+            if (promoConfirm == 'y') {
+                cout << "Please enter your code: ";
+                string promoInput;
+                cin.ignore();
+                getline(cin, promoInput);
+                if (promoInput.compare("I am a student") == 0) {
+                    cout << "Discounted price: " << traverse->getPrice() * 0.9 << endl;
+                    this->removeOrder(name);
+                    cout << "The order is delivered successfully" << endl;
+                    return;
+                }
+                cout << "Promotion code is not accepted" << endl;
+            }
+        } while (promoConfirm != 'n');
+        this->removeOrder(name);
+        cout << "The order is delivered successfully" << endl;
+        return;
+    }
+    void removeOrder(string name) {
+        Order * traverse = head;
+        Order * tail = head;
+        while(traverse->getName().compare(name) != 0) {
+            tail = traverse;
+            traverse = traverse->getNext();
+        }
+        if (traverse == head) {
+            head = traverse->getNext();
+            //delete traverse;
+        } else {
+            tail->setNext(traverse->getNext());
+            //delete traverse;
+        }
     }
 };

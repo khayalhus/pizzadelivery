@@ -23,6 +23,10 @@ class Order {
         this->drink = drink;
         this->next = NULL;
     }
+    ~Order() {
+        delete [] pizzas;
+        delete [] drink;
+    }
     void printOrder(){
         cout << "------------" << endl;
         cout << "Name : " << this->customer << endl << endl;
@@ -34,14 +38,14 @@ class Order {
         if (this->drink[0] != 0) {
             cout << this->drink[0] << " cola, ";
         }
-        if (this->drink[0] != 0) {
-            cout << this->drink[0] << " soda, ";
+        if (this->drink[1] != 0) {
+            cout << this->drink[1] << " soda, ";
         }
-        if (this->drink[0] != 0) {
-            cout << this->drink[0] << " ice tea, ";
+        if (this->drink[2] != 0) {
+            cout << this->drink[2] << " ice tea, ";
         }
-        if (this->drink[0] != 0) {
-            cout << this->drink[0] << " fruit juice, ";
+        if (this->drink[3] != 0) {
+            cout << this->drink[3] << " fruit juice, ";
         }
         cout << endl << "------------" << endl;
     }
@@ -70,4 +74,7 @@ class Order {
 	Order * getNext() {
 		return this->next;
 	}
+    string getName() {
+        return customer;
+    }
 };

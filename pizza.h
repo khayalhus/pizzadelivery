@@ -59,7 +59,7 @@ public:
 		this->size = object_in.size;
 		this->crust_type = object_in.crust_type;
 		this->ingredients = new string [6];
-		cout << "Please enter the number of ingredient you want to remove from your pizza." << endl;
+		cout << "Please enter the number of the ingredient you want to remove from your pizza." << endl;
 		for(int i = 0; i < 6; i++) {
 			this->ingredients[i] = object_in.ingredients[i];
 			cout << i+1 << ". " << this->ingredients[i] << endl;
@@ -72,6 +72,9 @@ public:
 			cin >> num;
 		}
 		this->next = NULL;
+	}
+	~Pizza() {
+		delete [] ingredients;
 	}
 	void remove(int num) {
 		this->ingredients[num-1] = "";
