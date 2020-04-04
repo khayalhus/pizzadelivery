@@ -24,7 +24,13 @@ class Order {
         this->next = NULL;
     }
     ~Order() {
-        delete [] pizzas;
+        Pizza * traverse = pizzas;
+        Pizza * temp;
+        while (traverse != NULL) {
+            temp = traverse;
+            traverse = traverse->getNext();
+            delete temp;
+        }
         delete [] drink;
     }
     void printOrder(){

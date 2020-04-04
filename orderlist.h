@@ -12,7 +12,13 @@ class OrderList {
         head = NULL;
     }
     ~OrderList() {
-        delete [] head;
+        Order * traverse = head;
+        Order * temp;
+        while (traverse != NULL) {
+            temp = traverse;
+            traverse = traverse->getNext();
+            delete traverse;
+        }
     }
     void takeOrder() {
         cout << "Pizza Menu" << endl;
@@ -164,10 +170,21 @@ class OrderList {
         }
         if (traverse == head) {
             head = traverse->getNext();
-            //delete traverse;
+            --n;
+            delete traverse;
         } else {
             tail->setNext(traverse->getNext());
-            //delete traverse;
+            --n;
+            delete traverse;
+        }
+    }
+    void close () {
+        Order * traverse = head;
+        Order * temp;
+        while(traverse != NULL) {
+            temp = traverse;
+            traverse = traverse->getNext;
+            delete temp;
         }
     }
 };
