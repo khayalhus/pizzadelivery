@@ -28,9 +28,11 @@ int main() {
 			list->deliverOrders();
 			break;
 		case 4:
+			list->close();
 			cout << "Goodbye..." << endl;
 			break;
 		default:
+			cout << "Invalid choice." << endl;
 			break;
 		}
 	}

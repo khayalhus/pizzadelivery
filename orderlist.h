@@ -37,15 +37,31 @@ class OrderList {
         int numOfDrinks = 0;
         string * drinks;
         cin >> pizza_type;
+        while (pizza_type != 1 && pizza_type != 2 && pizza_type != 3 && pizza_type != 0) {
+            cout << "Not a valid pizza type." << endl;
+            cin >> pizza_type;
+        }
         if (pizza_type == 0) {
             return;
         }
         cout << "Select size: small (15 TL), medium (20 TL), big (25 TL)" << endl;
         cin >> size;
+        while (size.compare("small") != 0 && size.compare("medium") != 0 && size.compare("big") != 0) {
+            cout << "Not a valid size." << endl;
+            cin >> size;
+        }
         cout << "Select crust type: thin, normal, thick" << endl;
         cin >> crust_type;
+        while (crust_type.compare("thin") != 0 && crust_type.compare("normal") != 0 && crust_type.compare("thick") != 0) {
+            cout << "Not a valid crust type" << endl;
+            cin >> crust_type;
+        }
         cout << "Enter the amount:";
         cin >> amount;
+        while (amount < 1) {
+            cout << "Amount must be equal to or bigger than 1" << endl;
+            cin >> amount;
+        }
         Pizza * headpizza = new Pizza(size, crust_type, pizza_type);
         Pizza * tail = headpizza;
         for (int i = 1; i < amount; i++) {
@@ -84,7 +100,9 @@ class OrderList {
                 drinkNums[2] += 1;
             } else if (drinkNum == 4) {
                 drinkNums[3] += 1;
-            } 
+            } else {
+                cout << "Invalid input" << endl;
+            }
         } while (drinkNum != -1);
             cout << "Please enter your name:" << endl;
             cin.ignore();
@@ -183,7 +201,7 @@ class OrderList {
         Order * temp;
         while(traverse != NULL) {
             temp = traverse;
-            traverse = traverse->getNext;
+            traverse = traverse->getNext();
             delete temp;
         }
     }

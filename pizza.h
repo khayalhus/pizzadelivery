@@ -68,7 +68,11 @@ public:
 		int num;
 		cin >> num;
 		while(num != 0) {
-			this->remove(num);
+			if (num > 0 && num < 7) {
+				this->remove(num);
+			} else {
+				cout << "Invalid input" << endl;
+			}
 			cin >> num;
 		}
 		this->next = NULL;
