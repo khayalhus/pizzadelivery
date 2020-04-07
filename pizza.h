@@ -66,14 +66,22 @@ public:
 		}
 		cout << "Press 0 to save it." << endl;
 		int num;
-		cin >> num;
-		while(num != 0) {
-			if (num > 0 && num < 7) {
+		while (true) {
+			cin >> num;
+			if (cin.fail()) {
+				cin.clear();
+				cin.ignore(10000, '\n');
+				cout << "Invalid input" << endl;
+				continue;
+			}
+			if ( num == 0 ) {
+				break;
+			}
+			if (num > 0 && num < 7 ) {
 				this->remove(num);
 			} else {
 				cout << "Invalid input" << endl;
 			}
-			cin >> num;
 		}
 		this->next = NULL;
 	}

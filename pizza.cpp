@@ -14,6 +14,10 @@ int main() {
 		cout << "4. Exit" << endl;
 		cout << "Choose what to do: " << endl;
 		cin >> choice;
+		while (cin.fail()) {
+			cin.clear();
+			cin.ignore(10000, '\n');
+		}
 		switch (choice)
 		{
 		case 1:

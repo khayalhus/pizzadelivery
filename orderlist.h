@@ -60,6 +60,11 @@ class OrderList {
         cin >> amount;
         while (amount < 1) {
             cout << "Amount must be equal to or bigger than 1" << endl;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
+            cout << "Enter the amount:";
             cin >> amount;
         }
         Pizza * headpizza = new Pizza(size, crust_type, pizza_type);
@@ -85,7 +90,7 @@ class OrderList {
             cin >> drinkNum;
             if (drinkNum == 0) {
                 cout << "Please enter your name:" << endl;
-                cin.ignore();
+                cin.ignore(10000, '\n');
                 getline(cin, customer);
                 Order * neworder = new Order(customer, headpizza);
                 AddToList(neworder);
@@ -105,7 +110,7 @@ class OrderList {
             }
         } while (drinkNum != -1);
             cout << "Please enter your name:" << endl;
-            cin.ignore();
+            cin.ignore(10000, '\n');
             getline(cin, customer);
             Order * neworder = new Order(customer, headpizza, drinkNums);
             AddToList(neworder);
@@ -145,7 +150,7 @@ class OrderList {
         cout << "Please write the customer name in order to deliver his/her order: ";
         string name;
         Order * traverse = head;
-        cin.ignore();
+        cin.ignore(10000, '\n');
         getline(cin, name);
         while(traverse->getName().compare(name) != 0) {
             traverse = traverse->getNext();
@@ -164,7 +169,7 @@ class OrderList {
             if (promoConfirm == 'y') {
                 cout << "Please enter your code: ";
                 string promoInput;
-                cin.ignore();
+                cin.ignore(10000, '\n');
                 getline(cin, promoInput);
                 if (promoInput.compare("I am a student") == 0) {
                     cout << "Discounted price: " << traverse->getPrice() * 0.9 << endl;
