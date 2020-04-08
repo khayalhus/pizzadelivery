@@ -3,23 +3,23 @@
 using namespace std;
 
 class Pizza {
-	string name;
-	string size;
-	string * ingredients;
-	string crust_type;
-	Pizza * next;
+	string name; // stores pizza name
+	string size; // stores size of pizza
+	string * ingredients; // dynamic array of ingredients in pizza
+	string crust_type; // crust type of pizza
+	Pizza * next; // next pizza in the order
 public:
-	Pizza() {
+	Pizza() { // default constructor
 		this->size = "medium";
 		this->crust_type = "normal";
-		this->ingredients = new string [6];
+		this->ingredients = new string [6]; // dynamic array of strings was used for ingredients, because all pizza types contain 6 ingredients
 		this->ingredients[0] = "mozarella";
 		this->next = NULL;
 	}
-	Pizza(string size, string crust_type, int pizza_type) {
+	Pizza(string size, string crust_type, int pizza_type) { // constructor for first pizza
 		this->size = size;
 		this->crust_type = crust_type;
-		this->ingredients = new string [6];
+		this->ingredients = new string [6];	// dynamic array of strings was used for ingredients, because all pizza types contain 6 ingredients
 		this->next = NULL;
 		switch (pizza_type)
 		{
@@ -58,27 +58,27 @@ public:
 		this->name = object_in.name;
 		this->size = object_in.size;
 		this->crust_type = object_in.crust_type;
-		this->ingredients = new string [6];
+		this->ingredients = new string [6];	// dynamic array of strings was used for ingredients, because all pizza types contain 6 ingredients
 		cout << "Please enter the number of the ingredient you want to remove from your pizza." << endl;
 		for(int i = 0; i < 6; i++) {
-			this->ingredients[i] = object_in.ingredients[i];
+			this->ingredients[i] = object_in.ingredients[i]; // copy the ingredients' name from the first pizza
 			cout << i+1 << ". " << this->ingredients[i] << endl;
 		}
 		cout << "Press 0 to save it." << endl;
-		int num;
+		int num; // the number of ingredient desired to be removed
 		while (true) {
 			cin >> num;
 			if (cin.fail()) {
 				cin.clear();
-				cin.ignore(10000, '\n');
+				cin.ignore(10000, '\n'); // prevents infinite loop when string input is entered
 				cout << "Invalid input" << endl;
 				continue;
 			}
 			if ( num == 0 ) {
-				break;
+				break; // finishes operation
 			}
 			if (num > 0 && num < 7 ) {
-				this->remove(num);
+				this->remove(num); // removes the desired ingredient
 			} else {
 				cout << "Invalid input" << endl;
 			}
@@ -86,15 +86,15 @@ public:
 		this->next = NULL;
 	}
 	~Pizza() {
-		delete [] ingredients;
+		delete [] ingredients; // free dynamically allocated memory
 	}
 	void remove(int num) {
-		this->ingredients[num-1] = "";
+		this->ingredients[num-1] = ""; // "removes" the ingredient by equalizing it to an empty string
 	}
 	void print() {
 		cout << this->name << "(";
 		for (int i = 0; i < 6; i++) {
-			if (ingredients[i] != "") {
+			if (ingredients[i] != "") { // if ingredient is not removed, print it
 				cout << this->ingredients[i] << ", ";
 			}
 		}
@@ -102,7 +102,7 @@ public:
 		cout << "size: " << this->size << ", crust: " << this->crust_type << endl << endl;
 	}
 	void setNext(Pizza * nextpizza) {
-		this->next = nextpizza;
+		this->next = nextpizza; // links pizzas
 	}
 	Pizza * getNext() {
 		return this->next;
