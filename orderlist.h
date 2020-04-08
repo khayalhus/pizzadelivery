@@ -1,5 +1,5 @@
 #include <iostream>
-#include "order.h"
+#include "order.h" // includes Order class file, which includes Pizza class file
 
 using namespace std;
 
@@ -104,8 +104,8 @@ class OrderList {
                 drinkNums[2] += 1; // increment ice tea
             } else if (drinkNum == 4) {
                 drinkNums[3] += 1; // increment fruit juice
-            } else {
-                cout << "Invalid input" << endl;
+            } else if (drinkNum != -1) {
+                cout << "Invalid input" << endl; // print invalid input otherwise
             }
         } while (drinkNum != -1);
             // save drinks
